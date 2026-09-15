@@ -96,8 +96,17 @@
         }
     </style>
 </head>
-<body class="antialiased">
+<body class="antialiased relative">
     
+    <!-- Floating Workspace Button -->
+    <a href="https://praetinee.github.io/JanWorkspace/" 
+       class="fixed top-4 right-4 z-[9999] bg-[#f8fafc] border border-slate-200 text-slate-700 px-4 py-2 rounded-xl shadow-sm hover:bg-slate-100 hover:shadow transition-all flex items-center gap-2 text-sm font-medium print:hidden cursor-pointer no-underline"
+       data-html2canvas-ignore="true"
+       title="Go to Workspace">
+        <i data-lucide="home" class="w-4 h-4"></i>
+        <span>Workspace</span>
+    </a>
+
     <div id="scale-wrapper" style="width: 100%; transform-origin: top center; transition: transform 0.1s ease-out;">
         <!-- ปรับความกว้างเป็น 1680px เพื่อให้มีพื้นที่เหลือเฟือ ไม่ให้ข้อความตกขอบ -->
         <div id="capture-area" style="width: 1680px; margin: 0 auto; background-color: #f8fafc;" class="min-h-screen pb-32 pt-10 px-14 relative">
