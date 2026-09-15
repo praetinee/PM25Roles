@@ -47,8 +47,9 @@
             --alert-bg: #1e4b3e; --alert-border: #123329; 
             --alert-text: #ffffff; --alert-hl: #fde047;
             
-            /* Connecting Lines */
-            --line-color: #64748b; 
+            /* Connectors */
+            --arrow-border: #60a5fa; /* Blue-400 */
+            --arrow-text: #2563eb; /* Blue-600 */
         }
 
         /* =========================================
@@ -65,7 +66,7 @@
         .inner-box:hover { transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
         
         .tag-code { position: absolute; top: 0.5rem; right: 0.5rem; background-color: var(--alert-bg); color: var(--alert-text); font-size: 0.7rem; padding: 0.25rem 0.75rem; border-radius: 9999px; font-weight: 700; z-index: 10; border: 1px solid var(--alert-border); box-shadow: 0 2px 4px rgba(0,0,0,0.15); letter-spacing: 0.025em; white-space: nowrap; }
-        .arrow-icon { color: var(--line-color); flex-shrink: 0; }
+        .arrow-icon { color: var(--text-muted); flex-shrink: 0; }
 
         /* Semantic Theme Classes */
         .col-1 { background-color: var(--c1-bg); border-color: var(--c1-border); }
@@ -114,10 +115,11 @@
 <body class="antialiased">
     
     <div id="scale-wrapper" style="width: 100%; transform-origin: top center; transition: transform 0.1s ease-out;">
-        <div id="capture-area" style="width: 1680px; margin: 0 auto; background-color: #f8fafc;" class="min-h-screen pb-24 pt-6 px-12">
+        <!-- เพิ่ม padding bottom เพื่อให้พื้นที่พอสำหรับเส้นลูปด้านล่าง -->
+        <div id="capture-area" style="width: 1680px; margin: 0 auto; background-color: #f8fafc;" class="min-h-screen pb-32 pt-8 px-12 relative">
             
             <!-- Header & Download Button -->
-            <div class="text-center mb-12 relative">
+            <div class="text-center mb-14 relative z-20">
                 <h2 class="text-4xl font-extrabold mb-2 tracking-wide" style="color: var(--text-main);">บทบาทของแต่ละหน่วยงาน</h2>
                 <p class="text-[1.15rem] font-bold text-muted">การดูแลผู้ป่วยที่ได้รับผลกระทบจาก PM 2.5 โรงพยาบาลสันทราย</p>
                 
@@ -127,7 +129,7 @@
                 </button>
             </div>
 
-            <div id="main-container" class="max-w-[1680px] w-full mx-auto relative pb-36 z-10 px-4">
+            <div id="main-container" class="max-w-[1680px] w-full mx-auto relative pb-20 z-10 px-4">
                 
                 <!-- Alert Box -->
                 <div class="flex justify-end mb-6 relative z-20">
@@ -138,25 +140,37 @@
 
                 <div id="main-grid" class="grid grid-cols-4 gap-8 relative z-10 items-stretch">
 
-                    <!-- Return Bridge -->
-                    <div class="flex absolute -bottom-[50px] h-0 border-t-[3px] border-dashed z-0 items-center justify-center pointer-events-none" style="left: calc(12.5% - 1rem); right: calc(12.5% - 1rem); border-color: var(--line-color);">
-                        <div class="bg-white px-6 py-2.5 rounded-full border-[2px] shadow-sm z-10 flex items-center justify-center pointer-events-auto" style="border-color: var(--line-color); transform: translateY(-1.5px);">
-                            <p class="font-bold text-[15px] whitespace-nowrap baseline-fix" style="color: var(--line-color);">
+                    <!-- ========================================================================= -->
+                    <!-- REDESIGNED RETURN BRIDGE (เส้นวงลูปทึบ U-Shape ด้านล่างสุด) -->
+                    <!-- ========================================================================= -->
+                    <div class="absolute -bottom-[75px] z-0 pointer-events-none" style="left: 12.5%; right: 12.5%; height: 75px;">
+                        <!-- The U-Line (Solid Path) -->
+                        <div class="w-full h-full border-b-[4px] border-l-[4px] border-r-[4px] rounded-b-[2.5rem] opacity-90 shadow-sm" style="border-color: var(--arrow-border);"></div>
+                        
+                        <!-- Left Arrow pointing up (To Column 1) -->
+                        <div class="absolute bottom-[65px] -left-[14px] bg-white border-[3px] rounded-full p-1 shadow-md" style="border-color: var(--arrow-border); color: var(--arrow-text);">
+                            <i data-lucide="arrow-up" class="w-5 h-5 font-bold"></i>
+                        </div>
+                        
+                        <!-- Right Anchor Dot (From Column 3) -->
+                        <div class="absolute bottom-[70px] -right-[6px] w-4 h-4 rounded-full shadow-sm" style="background-color: var(--arrow-border);"></div>
+                        
+                        <!-- Central Label Box -->
+                        <div class="absolute -bottom-[22px] left-1/2 -translate-x-1/2 bg-gradient-to-r from-blue-500 to-blue-600 px-8 py-3 rounded-full shadow-lg text-white pointer-events-auto flex items-center gap-2 border-[3px] border-white ring-2 ring-blue-100">
+                            <i data-lucide="refresh-cw" class="w-5 h-5"></i>
+                            <p class="font-bold text-[16px] whitespace-nowrap baseline-fix tracking-wide">
                                 การดูแลต่อเนื่องป้องกันการกำเริบซ้ำ
                             </p>
                         </div>
                     </div>
 
-                    <!-- Column 1: Left (Community) -->
+
+                    <!-- ================= Column 1: Left (Community) ================= -->
                     <div id="col-left" class="col-1 flow-col col-span-1 min-w-0">
                         
-                        <div class="block absolute top-1/2 -right-[2rem] w-[2rem] -translate-y-1/2 z-20 pointer-events-none">
-                            <div class="w-full h-0 border-t-[3px] border-dashed" style="border-color: var(--line-color);"></div>
-                            <div class="absolute right-[2px] top-1/2 -translate-y-1/2 w-0 h-0 border-y-[6px] border-l-[8px] border-y-transparent" style="border-left-color: var(--line-color);"></div>
-                        </div>
-
-                        <div class="block absolute -bottom-[50px] left-1/2 w-0 h-[50px] border-l-[3px] border-dashed -translate-x-1/2 z-0 pointer-events-none" style="border-color: var(--line-color);">
-                            <div class="absolute -top-[2px] left-1/2 -translate-x-1/2 w-0 h-0 border-x-[6px] border-b-[8px] border-x-transparent" style="border-bottom-color: var(--line-color);"></div>
+                        <!-- NEW CONNECTING ARROW (Col 1 -> Col 2) -->
+                        <div class="absolute top-1/2 -right-4 translate-x-[50%] -translate-y-1/2 z-30 bg-white p-2 rounded-full border-[3px] shadow-md pointer-events-none transition-transform" style="border-color: var(--arrow-border); color: var(--arrow-text);">
+                            <i data-lucide="arrow-right" class="w-7 h-7 font-extrabold"></i>
                         </div>
 
                         <div class="w-full flex justify-center">
@@ -196,12 +210,12 @@
                         </div>
                     </div>
 
-                    <!-- Column 2: Middle (Clinic & ER) -->
+                    <!-- ================= Column 2: Middle (Clinic & ER) ================= -->
                     <div id="col-mid" class="col-2 flow-col col-span-2 min-w-0">
                         
-                        <div class="block absolute top-1/2 -right-[2rem] w-[2rem] -translate-y-1/2 z-20 pointer-events-none">
-                            <div class="w-full h-0 border-t-[3px] border-dashed" style="border-color: var(--line-color);"></div>
-                            <div class="absolute right-[2px] top-1/2 -translate-y-1/2 w-0 h-0 border-y-[6px] border-l-[8px] border-y-transparent" style="border-left-color: var(--line-color);"></div>
+                        <!-- NEW CONNECTING ARROW (Col 2 -> Col 3) -->
+                        <div class="absolute top-1/2 -right-4 translate-x-[50%] -translate-y-1/2 z-30 bg-white p-2 rounded-full border-[3px] shadow-md pointer-events-none transition-transform" style="border-color: var(--arrow-border); color: var(--arrow-text);">
+                            <i data-lucide="arrow-right" class="w-7 h-7 font-extrabold"></i>
                         </div>
 
                         <div class="w-full flex justify-center">
@@ -212,6 +226,7 @@
                         
                         <div id="inner-grid" class="grid grid-cols-[1.05fr_0.95fr] gap-4 h-full mt-3 min-w-0">
                             
+                            <!-- Left Sub-column -->
                             <div class="space-y-4 flex flex-col justify-between h-full min-w-0">
                                 
                                 <div class="inner-box flex flex-col gap-2 relative border-orange-200 shadow-sm flex-1 p-4 min-w-0">
@@ -224,7 +239,8 @@
                                     </div>
                                     <div class="grid grid-cols-[1fr_auto_1fr] w-full gap-2 items-center h-full min-h-[40px] min-w-0">
                                         <div class="flex flex-col justify-center h-full min-w-0">
-                                            <p class="text-muted font-medium leading-tight text-[12px] truncate">ผ่าน Line OA หรือ หมอพร้อม</p>
+                                            <!-- Fixed Truncate Issue: Break words properly -->
+                                            <p class="text-muted font-medium leading-tight text-[12px] break-words">ผ่าน Line OA หรือ หมอพร้อม</p>
                                         </div>
                                         <i data-lucide="arrow-right" class="arrow-icon w-4 h-4 shrink-0"></i>
                                         <div class="flex flex-col justify-center items-end text-right h-full min-w-0">
@@ -247,7 +263,7 @@
                                         <i data-lucide="arrow-right" class="arrow-icon w-4 h-4 shrink-0"></i>
                                         <div class="flex flex-col justify-center items-center text-center h-full px-1 min-w-0">
                                             <p class="font-bold text-main leading-tight baseline-fix break-words">เข้าข่าย: ลง <a href="https://docs.google.com/spreadsheets/d/1fq34BEtpt6nWbxSupNacky3ZzlV7HymWNW2xv6LyIcA/edit?usp=sharing" target="_blank" class="text-blue-600 hover:text-blue-800 underline relative z-50 whitespace-nowrap" title="คลิกเพื่อกรอกข้อมูล">GG Sheets 🔗</a></p>
-                                            <p class="text-muted font-medium leading-tight mt-1">+ รักษาตามอาการ</p>
+                                            <p class="text-muted font-medium leading-tight mt-1 break-words">+ รักษาตามอาการ</p>
                                         </div>
                                         <i data-lucide="arrow-right" class="arrow-icon w-4 h-4 shrink-0"></i>
                                         <div class="flex flex-col justify-center items-center text-center h-full px-1">
@@ -270,7 +286,7 @@
                                         <i data-lucide="arrow-right" class="arrow-icon w-4 h-4 shrink-0"></i>
                                         <div class="flex flex-col justify-center items-center text-center h-full px-1 min-w-0">
                                             <p class="font-bold text-main leading-tight baseline-fix break-words">เข้าข่าย: ลง <a href="https://docs.google.com/spreadsheets/d/1j5xpdB-LNhucSVNhQuqShKUDv-xyWCGB5xhC295J3M4/edit?usp=sharing" target="_blank" class="text-blue-600 hover:text-blue-800 underline relative z-50 whitespace-nowrap" title="คลิกเพื่อกรอกข้อมูล">GG Sheets 🔗</a></p>
-                                            <p class="text-muted font-medium leading-tight mt-1">+ รักษาตามอาการ</p>
+                                            <p class="text-muted font-medium leading-tight mt-1 break-words">+ รักษาตามอาการ</p>
                                         </div>
                                         <i data-lucide="arrow-right" class="arrow-icon w-4 h-4 shrink-0"></i>
                                         <div class="flex flex-col justify-center items-center text-center h-full px-1">
@@ -289,7 +305,7 @@
                                     <div class="grid grid-cols-[1fr_auto_0.8fr_auto_1.4fr] w-full gap-2 h-full min-h-[50px] items-center text-[12px] min-w-0">
                                         <div class="flex flex-col justify-center items-center text-center h-full px-1 min-w-0">
                                             <p class="font-bold text-main leading-tight baseline-fix break-words">อาการรุนแรง</p>
-                                            <p class="text-muted font-medium leading-tight mt-1 truncate">(หอบหืด, COPD..)</p>
+                                            <p class="text-muted font-medium leading-tight mt-1 break-words">(หอบหืด, COPD..)</p>
                                         </div>
                                         <i data-lucide="arrow-right" class="arrow-icon w-4 h-4 shrink-0"></i>
                                         <div class="flex flex-col justify-center items-center text-center h-full px-1">
@@ -299,12 +315,13 @@
                                         <i data-lucide="arrow-right" class="arrow-icon w-4 h-4 shrink-0"></i>
                                         <div class="flex flex-col justify-center items-center text-center h-full px-1 min-w-0">
                                             <p class="font-bold text-main leading-tight baseline-fix break-words">เข้าข่าย: ลง <a href="https://docs.google.com/spreadsheets/d/1Ba-5IzHXOzEQziXY7vfdvDXzK0dOZv0VmoINAd-sNxU/edit?usp=drivesdk" target="_blank" class="text-blue-600 hover:text-blue-800 underline relative z-50 whitespace-nowrap" title="คลิกเพื่อกรอกข้อมูล">GG Sheets 🔗</a></p>
-                                            <p class="text-muted font-medium leading-tight mt-1">+ ประเมิน Admit/กลับบ้าน</p>
+                                            <p class="text-muted font-medium leading-tight mt-1 break-words">+ ประเมิน Admit/กลับบ้าน</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
+                            <!-- Right Sub-column (Pollution Clinic) -->
                             <div class="inner-box border-orange-400 bg-[#fff2e5] p-4 flex flex-col h-full relative shadow-md min-w-0">
                                 <div class="flex items-center justify-center gap-3 border-b-2 border-orange-200 pb-3 mb-5 w-full">
                                     <i data-lucide="stethoscope" class="w-6 h-6 text-orange-600 shrink-0"></i>
@@ -373,10 +390,8 @@
                         </div>
                     </div>
 
-                    <!-- Column 3: Right (Control & Discharge) -->
+                    <!-- ================= Column 3: Right (Control & Discharge) ================= -->
                     <div id="col-right" class="col-3 flow-col col-span-1 min-w-0">
-
-                        <div class="block absolute -bottom-[50px] left-1/2 w-0 h-[50px] border-l-[3px] border-dashed -translate-x-1/2 z-0 pointer-events-none" style="border-color: var(--line-color);"></div>
 
                         <div class="w-full flex justify-center">
                             <h2 class="text-[17px] font-extrabold text-center c3-title py-3 px-6 rounded-full shadow-sm whitespace-nowrap w-max min-w-full flex items-center justify-center">
@@ -393,7 +408,7 @@
                                     <div class="flex flex-col items-center justify-center h-full">
                                         <i data-lucide="shield-alert" class="w-10 h-10 mb-2 box-dc-icon"></i>
                                         <p class="font-bold text-[14px] text-main leading-tight baseline-fix">รับแจ้งข้อมูล</p>
-                                        <p class="text-[12px] text-muted font-medium leading-tight mt-1 opacity-90">ผู้ป่วยเข้าข่าย<br/>และอาการรุนแรง</p>
+                                        <p class="text-[12px] text-muted font-medium leading-tight mt-1 opacity-90 break-words">ผู้ป่วยเข้าข่าย<br/>และอาการรุนแรง</p>
                                     </div>
                                     <div class="flex items-center h-full">
                                         <i data-lucide="arrow-right" class="w-7 h-7 box-dc-icon opacity-70"></i>
@@ -401,7 +416,7 @@
                                     <div class="flex flex-col items-center justify-center h-full">
                                         <i data-lucide="megaphone" class="w-10 h-10 mb-2 box-dc-icon"></i>
                                         <p class="font-bold text-[14px] text-main leading-tight baseline-fix">สอบสวน & รายงาน</p>
-                                        <p class="text-[12px] text-muted font-medium mt-1 opacity-90">ลงพื้นที่สอบสวนโรค<br/>และรายงาน สสจ.</p>
+                                        <p class="text-[12px] text-muted font-medium mt-1 opacity-90 break-words">ลงพื้นที่สอบสวนโรค<br/>และรายงาน สสจ.</p>
                                     </div>
                                 </div>
                             </div>
@@ -412,7 +427,7 @@
                                 </h3>
                                 <div class="text-center space-y-3 flex flex-col justify-center items-center h-full">
                                     <div class="w-16 h-1 bg-current opacity-30 mx-auto rounded-full mb-2" style="color: var(--dis-title-text);"></div>
-                                    <p class="text-[13px] font-bold text-muted leading-relaxed opacity-90 baseline-fix">ประสานทีมเยี่ยมบ้าน<br/>ประเมินสภาพที่อยู่อาศัยไม่ให้กำเริบซ้ำ</p>
+                                    <p class="text-[13px] font-bold text-muted leading-relaxed opacity-90 baseline-fix break-words">ประสานทีมเยี่ยมบ้าน<br/>ประเมินสภาพที่อยู่อาศัยไม่ให้กำเริบซ้ำ</p>
                                 </div>
                             </div>
                         </div>
@@ -430,15 +445,16 @@
             window.addEventListener('resize', adjustScale);
         });
 
-        // ฟังก์ชันคำนวณย่อส่วน (Scale) แผนผังความกว้างให้พอดีกับหน้าจอทุกขนาดโดยอัตโนมัติ (ไม่ตกขอบ)
+        // ฟังก์ชันย่อหน้าจอให้มองเห็นครบถ้วนบนอุปกรณ์ขนาดเล็ก
         function adjustScale() {
             const wrapper = document.getElementById('scale-wrapper');
-            const targetWidth = 1740; // ความกว้างรวม Padding เผื่อระยะขอบ
+            const targetWidth = 1750; // ความกว้างรวมเผื่อขอบจอ (Padding)
             const screenWidth = window.innerWidth;
             
             if (screenWidth < targetWidth) {
                 const scale = screenWidth / targetWidth;
                 wrapper.style.transform = `scale(${scale})`;
+                // ชดเชยความสูงที่หดลงเพื่อไม่ให้มีพื้นที่ขาวเหลือด้านล่าง
                 const wrapperHeight = wrapper.offsetHeight;
                 wrapper.style.marginBottom = `-${wrapperHeight * (1 - scale)}px`;
             } else {
@@ -452,49 +468,64 @@
             const originalContent = btn.innerHTML;
             btn.innerHTML = 'กำลังประมวลผล...';
             
+            // รอให้ฟอนต์ทั้งหมดโหลดเสร็จสมบูรณ์ก่อนพิมพ์
             await document.fonts.ready;
             
+            // ใส่ Loading หน้าจอเพื่อกันไม่ให้ผู้ใช้เห็นจอกระตุกตอน Clone
             const overlay = document.createElement('div');
             overlay.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;background:#f8fafc;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;';
             overlay.innerHTML = `
                 <div style="font-family: 'Sarabun', sans-serif; text-align: center;">
                     <svg class="animate-spin mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
-                    <h2 style="font-size: 1.5rem; font-weight: 700; color: #1e293b;">กำลังสร้างรูปภาพ...</h2>
-                    <p style="color: #64748b; margin-top: 0.5rem;">จัดเตรียมแผนผังให้สมบูรณ์</p>
+                    <h2 style="font-size: 1.5rem; font-weight: 700; color: #1e293b;">กำลังสร้างรูปภาพคุณภาพสูง...</h2>
+                    <p style="color: #64748b; margin-top: 0.5rem;">กำลังจัดเรียงข้อมูลไม่ให้ตกขอบ กรุณารอสักครู่</p>
                 </div>
             `;
             document.body.appendChild(overlay);
 
             const captureArea = document.getElementById('capture-area');
-            const originalTransform = document.getElementById('scale-wrapper').style.transform;
-            document.getElementById('scale-wrapper').style.transform = 'scale(1)';
 
+            // หน่วงเวลาเล็กน้อยให้ Loading ขึ้นก่อน
             setTimeout(() => {
                 html2canvas(captureArea, {
-                    scale: 2, 
+                    scale: 2, // ความคมชัด 2 เท่า
                     backgroundColor: "#f8fafc", 
                     useCORS: true, 
                     scrollY: 0,
-                    windowWidth: 1680,
-                    logging: false
+                    scrollX: 0,
+                    width: 1680,
+                    windowWidth: 1680, // บังคับให้ระบบมองเห็นจอขนาดเต็ม 1680px เสมอ
+                    logging: false,
+                    onclone: function (clonedDoc) {
+                        // FIX TEXT CUTOFF: ไปปลดล็อกการตั้งค่า Scale ในเอกสารตัวโคลน 
+                        // เพื่อให้ HTML2Canvas ถ่ายภาพขนาดเต็มโดยไม่มีการตกขอบ
+                        const wrapper = clonedDoc.getElementById('scale-wrapper');
+                        if (wrapper) {
+                            wrapper.style.transform = 'none';
+                            wrapper.style.width = '1680px';
+                            wrapper.style.marginBottom = '0px';
+                        }
+                        const cArea = clonedDoc.getElementById('capture-area');
+                        if (cArea) {
+                            cArea.style.width = '1680px';
+                            cArea.style.margin = '0 auto';
+                        }
+                    }
                 }).then(canvas => {
-                    cleanUpAndRestore();
+                    document.body.removeChild(overlay);
+                    btn.innerHTML = originalContent;
+                    
                     const link = document.createElement('a');
                     link.download = 'PM25_Roles_Sansai_Hospital.png';
                     link.href = canvas.toDataURL('image/png', 1.0);
                     link.click();
                 }).catch(err => {
                     console.error("Error generating image:", err);
-                    cleanUpAndRestore();
+                    document.body.removeChild(overlay);
+                    btn.innerHTML = originalContent;
                     alert("เกิดข้อผิดพลาดในการบันทึกรูปภาพ กรุณาลองใหม่อีกครั้ง");
                 });
-            }, 300);
-            
-            function cleanUpAndRestore() {
-                document.getElementById('scale-wrapper').style.transform = originalTransform;
-                document.body.removeChild(overlay);
-                btn.innerHTML = originalContent;
-            }
+            }, 500);
         }
     </script>
 </body>
