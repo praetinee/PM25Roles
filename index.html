@@ -113,9 +113,8 @@
 </head>
 <body class="antialiased">
     
-    <!-- Outer Scalable Container -->
     <div id="scale-wrapper" style="width: 100%; transform-origin: top center; transition: transform 0.1s ease-out;">
-        <div id="capture-area" style="width: 1600px; margin: 0 auto; background-color: #f8fafc;" class="min-h-screen pb-20 pt-6 px-12">
+        <div id="capture-area" style="width: 1680px; margin: 0 auto; background-color: #f8fafc;" class="min-h-screen pb-24 pt-6 px-12">
             
             <!-- Header & Download Button -->
             <div class="text-center mb-12 relative">
@@ -128,7 +127,7 @@
                 </button>
             </div>
 
-            <div id="main-container" class="max-w-[1600px] w-full mx-auto relative pb-32 z-10 px-4">
+            <div id="main-container" class="max-w-[1680px] w-full mx-auto relative pb-36 z-10 px-4">
                 
                 <!-- Alert Box -->
                 <div class="flex justify-end mb-6 relative z-20">
@@ -137,11 +136,10 @@
                     </div>
                 </div>
 
-                <!-- 4 Columns Grid -->
                 <div id="main-grid" class="grid grid-cols-4 gap-8 relative z-10 items-stretch">
 
                     <!-- Return Bridge -->
-                    <div class="flex absolute -bottom-[45px] h-0 border-t-[3px] border-dashed z-0 items-center justify-center pointer-events-none" style="left: calc(12.5% - 1rem); right: calc(12.5% - 1rem); border-color: var(--line-color);">
+                    <div class="flex absolute -bottom-[50px] h-0 border-t-[3px] border-dashed z-0 items-center justify-center pointer-events-none" style="left: calc(12.5% - 1rem); right: calc(12.5% - 1rem); border-color: var(--line-color);">
                         <div class="bg-white px-6 py-2.5 rounded-full border-[2px] shadow-sm z-10 flex items-center justify-center pointer-events-auto" style="border-color: var(--line-color); transform: translateY(-1.5px);">
                             <p class="font-bold text-[15px] whitespace-nowrap baseline-fix" style="color: var(--line-color);">
                                 การดูแลต่อเนื่องป้องกันการกำเริบซ้ำ
@@ -157,7 +155,7 @@
                             <div class="absolute right-[2px] top-1/2 -translate-y-1/2 w-0 h-0 border-y-[6px] border-l-[8px] border-y-transparent" style="border-left-color: var(--line-color);"></div>
                         </div>
 
-                        <div class="block absolute -bottom-[45px] left-1/2 w-0 h-[45px] border-l-[3px] border-dashed -translate-x-1/2 z-0 pointer-events-none" style="border-color: var(--line-color);">
+                        <div class="block absolute -bottom-[50px] left-1/2 w-0 h-[50px] border-l-[3px] border-dashed -translate-x-1/2 z-0 pointer-events-none" style="border-color: var(--line-color);">
                             <div class="absolute -top-[2px] left-1/2 -translate-x-1/2 w-0 h-0 border-x-[6px] border-b-[8px] border-x-transparent" style="border-bottom-color: var(--line-color);"></div>
                         </div>
 
@@ -378,7 +376,7 @@
                     <!-- Column 3: Right (Control & Discharge) -->
                     <div id="col-right" class="col-3 flow-col col-span-1 min-w-0">
 
-                        <div class="block absolute -bottom-[45px] left-1/2 w-0 h-[45px] border-l-[3px] border-dashed -translate-x-1/2 z-0 pointer-events-none" style="border-color: var(--line-color);"></div>
+                        <div class="block absolute -bottom-[50px] left-1/2 w-0 h-[50px] border-l-[3px] border-dashed -translate-x-1/2 z-0 pointer-events-none" style="border-color: var(--line-color);"></div>
 
                         <div class="w-full flex justify-center">
                             <h2 class="text-[17px] font-extrabold text-center c3-title py-3 px-6 rounded-full shadow-sm whitespace-nowrap w-max min-w-full flex items-center justify-center">
@@ -432,16 +430,15 @@
             window.addEventListener('resize', adjustScale);
         });
 
-        // ฟังก์ชันคำนวณย่อส่วน (Scale) แผนผังความกว้าง 1600px ให้พอดีกับหน้าจอทุกขนาดโดยอัตโนมัติ
+        // ฟังก์ชันคำนวณย่อส่วน (Scale) แผนผังความกว้างให้พอดีกับหน้าจอทุกขนาดโดยอัตโนมัติ (ไม่ตกขอบ)
         function adjustScale() {
             const wrapper = document.getElementById('scale-wrapper');
-            const targetWidth = 1660; // ความกว้างรวม Padding เผื่อเล็กน้อย
+            const targetWidth = 1740; // ความกว้างรวม Padding เผื่อระยะขอบ
             const screenWidth = window.innerWidth;
             
             if (screenWidth < targetWidth) {
                 const scale = screenWidth / targetWidth;
                 wrapper.style.transform = `scale(${scale})`;
-                // ชดเชยความสูงที่หายไปจากการย่อ Scale เพื่อไม่ให้เกิดช่องว่างด้านล่างมากเกินไป
                 const wrapperHeight = wrapper.offsetHeight;
                 wrapper.style.marginBottom = `-${wrapperHeight * (1 - scale)}px`;
             } else {
@@ -478,7 +475,7 @@
                     backgroundColor: "#f8fafc", 
                     useCORS: true, 
                     scrollY: 0,
-                    windowWidth: 1600,
+                    windowWidth: 1680,
                     logging: false
                 }).then(canvas => {
                     cleanUpAndRestore();
