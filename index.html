@@ -11,19 +11,19 @@
     
     <style type="text/tailwindcss">
         /* =========================================
-            THEME VARIABLES (FIXED PASTEL PALETTE)
+            THEME VARIABLES (MATCHING REFERENCE IMAGE)
             ========================================= */
         :root {
             --text-main: #1e293b; 
             --text-muted: #475569; 
             --bg-card: #ffffff; 
             --border-card: #e2e8f0;
-            --shadow-box: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
+            --shadow-subtle: 0 2px 10px rgba(0,0,0,0.03);
 
             /* Column 1 (Yellow/Community) */
-            --c1-bg: #fefce8; --c1-border: #fde047; 
+            --c1-bg: #fffce8; --c1-border: #fde047; 
             --c1-title-bg: #fef9c3; --c1-title-text: #854d0e; 
-            --c1-icon: #d97706; 
+            --c1-icon: #ca8a04; 
 
             /* Column 2 (Orange/Clinic) */
             --c2-bg: #fff7ed; --c2-border: #fb923c; 
@@ -44,12 +44,11 @@
             --dis-title-bg: #dcfce7; --dis-title-text: #166534; 
 
             /* Alert & Tags */
-            --alert-bg: #1e4b3e; --alert-border: #123329; 
+            --alert-bg: #113629; --alert-border: #064e3b; 
             --alert-text: #ffffff; --alert-hl: #fde047;
             
-            /* Connectors */
-            --arrow-border: #60a5fa; /* Blue-400 */
-            --arrow-text: #2563eb; /* Blue-600 */
+            /* Connectors (Clean Blue) */
+            --connector-color: #3b82f6; 
         }
 
         /* =========================================
@@ -60,329 +59,319 @@
         .text-main { color: var(--text-main); }
         .text-muted { color: var(--text-muted); }
 
-        .flow-col { border-width: 3px; border-radius: 2rem; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; position: relative; height: 100%; transition: all 0.3s; z-index: 10; }
+        /* Main Column Styling */
+        .flow-col { border-width: 3px; border-radius: 1.5rem; padding: 1.25rem; display: flex; flex-direction: column; gap: 1rem; position: relative; height: 100%; transition: all 0.3s; z-index: 10; background-color: var(--bg-card); }
         
-        .inner-box { background-color: var(--bg-card); border: 1px solid var(--border-card); border-radius: 0.75rem; padding: 1rem; box-shadow: var(--shadow-box); transition: all 0.3s; }
-        .inner-box:hover { transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+        /* Inner Card Styling */
+        .inner-box { background-color: var(--bg-card); border: 1px solid var(--border-card); border-radius: 0.75rem; padding: 1rem; box-shadow: var(--shadow-subtle); transition: transform 0.2s ease; }
         
-        .tag-code { position: absolute; top: 0.5rem; right: 0.5rem; background-color: var(--alert-bg); color: var(--alert-text); font-size: 0.7rem; padding: 0.25rem 0.75rem; border-radius: 9999px; font-weight: 700; z-index: 10; border: 1px solid var(--alert-border); box-shadow: 0 2px 4px rgba(0,0,0,0.15); letter-spacing: 0.025em; white-space: nowrap; }
-        .arrow-icon { color: var(--text-muted); flex-shrink: 0; }
+        .tag-code { position: absolute; top: 0.5rem; right: 0.5rem; background-color: var(--alert-bg); color: var(--alert-text); font-size: 0.7rem; padding: 0.2rem 0.6rem; border-radius: 9999px; font-weight: 700; z-index: 10; letter-spacing: 0.025em; white-space: nowrap; }
 
         /* Semantic Theme Classes */
-        .col-1 { background-color: var(--c1-bg); border-color: var(--c1-border); }
+        .col-1 { border-color: var(--c1-border); }
         .c1-title { background-color: var(--c1-title-bg); color: var(--c1-title-text); }
         .c1-text { color: var(--c1-title-text); }
         .c1-icon { color: var(--c1-icon); }
 
-        .col-2 { background-color: var(--c2-bg); border-color: var(--c2-border); }
+        .col-2 { border-color: var(--c2-border); }
         .c2-title { background-color: var(--c2-title-bg); color: var(--c2-title-text); }
         .c2-text { color: var(--c2-title-text); }
         .c2-icon { color: var(--c2-icon); }
 
-        .col-3 { background-color: var(--c3-bg); border-color: var(--c3-border); }
+        .col-3 { border-color: var(--c3-border); }
         .c3-title { background-color: var(--c3-title-bg); color: var(--c3-title-text); }
 
-        .box-dc { background-color: var(--dc-bg); border-color: var(--dc-border); border-width: 3px; }
+        .box-dc { border-color: var(--dc-border); border-width: 2px; }
         .box-dc-title { background-color: var(--dc-title-bg); color: var(--dc-title-text); }
         .box-dc-icon { color: var(--dc-icon); }
 
-        .box-discharge { background-color: var(--dis-bg); border-color: var(--dis-border); border-width: 3px; }
+        .box-discharge { border-color: var(--dis-border); border-width: 2px; }
         .box-discharge-title { background-color: var(--dis-title-bg); color: var(--dis-title-text); }
         
-        .baseline-fix {
-            position: relative !important;
-            top: -2px !important;
-            display: block;
-        }
-        .baseline-fix-inline {
-            position: relative !important;
-            top: -2px !important;
-            display: inline-block;
-        }
+        .baseline-fix { position: relative !important; top: -2px !important; display: block; }
+        .baseline-fix-inline { position: relative !important; top: -2px !important; display: inline-block; }
 
         @media print {
-            body, *, svg, path {
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
-            }
-            .shadow-sm, .shadow-md, .shadow-lg {
-                box-shadow: none !important;
-                border: 1px solid #e2e8f0 !important;
-            }
+            body, *, svg, path { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
         }
     </style>
 </head>
 <body class="antialiased">
     
     <div id="scale-wrapper" style="width: 100%; transform-origin: top center; transition: transform 0.1s ease-out;">
-        <!-- เพิ่ม padding bottom เพื่อให้พื้นที่พอสำหรับเส้นลูปด้านล่าง -->
-        <div id="capture-area" style="width: 1680px; margin: 0 auto; background-color: #f8fafc;" class="min-h-screen pb-32 pt-8 px-12 relative">
+        <!-- ปรับความกว้างเป็น 1680px เพื่อให้มีพื้นที่เหลือเฟือ ไม่ให้ข้อความตกขอบ -->
+        <div id="capture-area" style="width: 1680px; margin: 0 auto; background-color: #f8fafc;" class="min-h-screen pb-32 pt-10 px-14 relative">
             
             <!-- Header & Download Button -->
-            <div class="text-center mb-14 relative z-20">
-                <h2 class="text-4xl font-extrabold mb-2 tracking-wide" style="color: var(--text-main);">บทบาทของแต่ละหน่วยงาน</h2>
-                <p class="text-[1.15rem] font-bold text-muted">การดูแลผู้ป่วยที่ได้รับผลกระทบจาก PM 2.5 โรงพยาบาลสันทราย</p>
+            <div class="text-center mb-12 relative z-20">
+                <h2 class="text-[2.5rem] font-extrabold mb-1 tracking-tight text-slate-800">บทบาทของแต่ละหน่วยงาน</h2>
+                <p class="text-lg font-semibold text-slate-500">การดูแลผู้ป่วยที่ได้รับผลกระทบจาก PM 2.5 โรงพยาบาลสันทราย</p>
                 
-                <button onclick="downloadImage()" class="mt-5 inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 px-6 rounded-full shadow-lg transition-all print:hidden cursor-pointer" data-html2canvas-ignore="true">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                <button onclick="downloadImage()" class="mt-6 inline-flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-white font-bold py-2.5 px-6 rounded-full shadow-md transition-all print:hidden cursor-pointer" data-html2canvas-ignore="true">
+                    <i data-lucide="download" class="w-5 h-5"></i>
                     ดาวน์โหลดแผนผัง
                 </button>
             </div>
 
-            <div id="main-container" class="max-w-[1680px] w-full mx-auto relative pb-20 z-10 px-4">
+            <div id="main-container" class="w-full mx-auto relative pb-20 z-10">
                 
-                <!-- Alert Box -->
+                <!-- Alert Box (Top Right) -->
                 <div class="flex justify-end mb-6 relative z-20">
-                    <div class="px-5 py-2.5 rounded-full font-bold shadow-lg text-sm flex items-center border" style="background-color: var(--alert-bg); color: var(--alert-text); border-color: var(--alert-border);">
-                        <span class="mr-2" style="color: var(--alert-hl);">ย้ำ!</span> <span class="baseline-fix-inline">บันทึกรหัสโรค Z58.1 (Exposure to air pollution) ทุกจุดบริการเพื่อวิเคราะห์ข้อมูล</span>
+                    <div class="px-5 py-2.5 rounded-full font-bold shadow-md text-[13px] flex items-center border" style="background-color: var(--alert-bg); color: var(--alert-text); border-color: var(--alert-border);">
+                        <span class="mr-2 px-2 py-0.5 rounded text-black bg-yellow-400 text-xs shadow-sm">ย้ำ!</span> 
+                        <span class="baseline-fix-inline tracking-wide">บันทึกรหัสโรค Z58.1 (Exposure to air pollution) ทุกจุดบริการเพื่อวิเคราะห์ข้อมูล</span>
                     </div>
                 </div>
 
-                <div id="main-grid" class="grid grid-cols-4 gap-8 relative z-10 items-stretch">
+                <!-- Main Grid -->
+                <div id="main-grid" class="grid grid-cols-4 gap-x-12 gap-y-8 relative z-10 items-stretch">
 
                     <!-- ========================================================================= -->
-                    <!-- REDESIGNED RETURN BRIDGE (เส้นวงลูปทึบ U-Shape ด้านล่างสุด) -->
+                    <!-- THE BOTTOM RETURN LOOP (U-SHAPE) - CLEAN VECTOR STYLE -->
                     <!-- ========================================================================= -->
-                    <div class="absolute -bottom-[75px] z-0 pointer-events-none" style="left: 12.5%; right: 12.5%; height: 75px;">
-                        <!-- The U-Line (Solid Path) -->
-                        <div class="w-full h-full border-b-[4px] border-l-[4px] border-r-[4px] rounded-b-[2.5rem] opacity-90 shadow-sm" style="border-color: var(--arrow-border);"></div>
+                    <div class="absolute -bottom-[90px] z-0 pointer-events-none" style="left: 12.5%; right: 12.5%; height: 90px;">
+                        <!-- Solid U-Curve Path -->
+                        <div class="w-full h-full border-b-[3px] border-l-[3px] border-r-[3px] rounded-b-[2rem]" style="border-color: var(--connector-color);"></div>
                         
-                        <!-- Left Arrow pointing up (To Column 1) -->
-                        <div class="absolute bottom-[65px] -left-[14px] bg-white border-[3px] rounded-full p-1 shadow-md" style="border-color: var(--arrow-border); color: var(--arrow-text);">
-                            <i data-lucide="arrow-up" class="w-5 h-5 font-bold"></i>
-                        </div>
+                        <!-- Top-Left Arrow Head (Pointing Up) -->
+                        <div class="absolute bottom-[88px] left-[-7px] w-0 h-0 border-x-[6px] border-x-transparent border-b-[10px]" style="border-bottom-color: var(--connector-color);"></div>
                         
-                        <!-- Right Anchor Dot (From Column 3) -->
-                        <div class="absolute bottom-[70px] -right-[6px] w-4 h-4 rounded-full shadow-sm" style="background-color: var(--arrow-border);"></div>
+                        <!-- Top-Right Anchor Point (Flat cut-off is fine, or a small dot) -->
                         
-                        <!-- Central Label Box -->
-                        <div class="absolute -bottom-[22px] left-1/2 -translate-x-1/2 bg-gradient-to-r from-blue-500 to-blue-600 px-8 py-3 rounded-full shadow-lg text-white pointer-events-auto flex items-center gap-2 border-[3px] border-white ring-2 ring-blue-100">
-                            <i data-lucide="refresh-cw" class="w-5 h-5"></i>
-                            <p class="font-bold text-[16px] whitespace-nowrap baseline-fix tracking-wide">
+                        <!-- Central Pill Label -->
+                        <div class="absolute -bottom-[20px] left-1/2 -translate-x-1/2 px-8 py-2.5 rounded-full shadow-md text-white pointer-events-auto flex items-center gap-2" style="background-color: var(--connector-color);">
+                            <i data-lucide="refresh-cw" class="w-4 h-4"></i>
+                            <p class="font-bold text-[15px] whitespace-nowrap baseline-fix tracking-wide">
                                 การดูแลต่อเนื่องป้องกันการกำเริบซ้ำ
                             </p>
                         </div>
                     </div>
 
-
                     <!-- ================= Column 1: Left (Community) ================= -->
-                    <div id="col-left" class="col-1 flow-col col-span-1 min-w-0">
-                        
-                        <!-- NEW CONNECTING ARROW (Col 1 -> Col 2) -->
-                        <div class="absolute top-1/2 -right-4 translate-x-[50%] -translate-y-1/2 z-30 bg-white p-2 rounded-full border-[3px] shadow-md pointer-events-none transition-transform" style="border-color: var(--arrow-border); color: var(--arrow-text);">
-                            <i data-lucide="arrow-right" class="w-7 h-7 font-extrabold"></i>
-                        </div>
+                    <div class="col-span-1 relative min-w-0">
+                        <div id="col-left" class="col-1 flow-col bg-yellow-50/30">
+                            
+                            <!-- Arrow Connector (Col 1 -> Col 2) -->
+                            <div class="absolute top-1/2 -right-[35px] -translate-y-1/2 z-30 w-11 h-11 rounded-full flex items-center justify-center border-[4px] border-white shadow-sm pointer-events-none" style="background-color: var(--connector-color); color: white;">
+                                <i data-lucide="arrow-right" class="w-5 h-5 font-black"></i>
+                            </div>
 
-                        <div class="w-full flex justify-center">
-                            <h2 class="text-[17px] font-extrabold text-center c1-title py-3 px-6 rounded-full shadow-sm whitespace-nowrap w-max min-w-full flex items-center justify-center">
-                                <span class="baseline-fix-inline">ชุมชนและหน่วยบริการปฐมภูมิ (เชิงรุก)</span>
-                            </h2>
-                        </div>
+                            <div class="w-full flex justify-center mt-2">
+                                <h2 class="text-[15px] font-extrabold text-center c1-title py-2 px-6 rounded-full whitespace-nowrap w-max">
+                                    <span class="baseline-fix-inline">ชุมชนและหน่วยบริการปฐมภูมิ (เชิงรุก)</span>
+                                </h2>
+                            </div>
 
-                        <div class="flex flex-col items-center text-center py-5 mt-3 bg-white/60 rounded-xl border border-yellow-200 shadow-sm">
-                            <div class="flex justify-center mb-2">
-                                <i data-lucide="users" class="w-12 h-12 c1-icon"></i>
-                            </div>
-                            <h3 class="font-bold text-xl c1-text baseline-fix">กลไก 3 หมอ</h3>
-                        </div>
-                        <div class="flex-grow space-y-5 mt-2">
-                             <div class="flex items-start gap-4">
-                                <i data-lucide="clipboard-list" class="w-7 h-7 c1-icon shrink-0 mt-1"></i>
-                                <div>
-                                    <p class="font-bold text-main text-base baseline-fix">การลงพื้นที่เชิงรุก: อสม. และ รพ.สต.</p>
-                                    <p class="text-sm text-muted leading-relaxed font-medium">เคาะประตูบ้านคัดกรองสุขภาพ เน้น 4 กลุ่มเปราะบาง (ติดเตียง/ผู้สูงอายุ/ตั้งครรภ์/เด็กเล็ก)</p>
+                            <!-- กลไก 3 หมอ -->
+                            <div class="flex flex-col items-center text-center py-6 mt-2 bg-white rounded-xl border border-yellow-200 shadow-sm">
+                                <div class="flex justify-center mb-2">
+                                    <i data-lucide="users" class="w-10 h-10 c1-icon"></i>
                                 </div>
+                                <h3 class="font-bold text-lg c1-text baseline-fix">กลไก 3 หมอ</h3>
                             </div>
-                            <div class="flex items-start gap-4">
-                                <i data-lucide="shield-check" class="w-7 h-7 c1-icon shrink-0 mt-1"></i>
-                                <div>
-                                    <p class="font-bold text-main text-base baseline-fix">สนับสนุนพื้นที่ปลอดฝุ่น:</p>
-                                    <p class="text-sm text-muted leading-relaxed font-medium">แจกหน้ากาก N95, จัดทำมุ้งสู้ฝุ่นให้ผู้ป่วยติดเตียง, ห้องปลอดฝุ่นในศูนย์เด็กเล็ก/โรงเรียน</p>
+
+                            <div class="flex-grow space-y-6 mt-4 px-2">
+                                <div class="flex items-start gap-3">
+                                    <i data-lucide="clipboard-list" class="w-5 h-5 c1-icon shrink-0 mt-0.5"></i>
+                                    <div>
+                                        <p class="font-bold text-main text-[14px] baseline-fix">การลงพื้นที่เชิงรุก: อสม. และ รพ.สต.</p>
+                                        <p class="text-[13px] text-muted leading-snug font-medium mt-1">เคาะประตูบ้านคัดกรองสุขภาพ เน้น 4 กลุ่มเปราะบาง (ติดเตียง/ผู้สูงอายุ/ตั้งครรภ์/เด็กเล็ก)</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="flex items-start gap-4">
-                                <i data-lucide="pill" class="w-7 h-7 c1-icon shrink-0 mt-1"></i>
-                                <div>
-                                    <p class="font-bold text-main text-base baseline-fix">สั่งจ่ายยาผ่าน Telemedicine :</p>
-                                    <p class="text-sm text-muted leading-relaxed font-medium">ติดตามและสั่งจ่ายยาสำหรับผู้ป่วยอาการคงที่ เพื่อลดความเสี่ยงสัมผัสฝุ่น</p>
+                                <div class="flex items-start gap-3">
+                                    <i data-lucide="shield-check" class="w-5 h-5 c1-icon shrink-0 mt-0.5"></i>
+                                    <div>
+                                        <p class="font-bold text-main text-[14px] baseline-fix">สนับสนุนพื้นที่ปลอดฝุ่น:</p>
+                                        <p class="text-[13px] text-muted leading-snug font-medium mt-1">แจกหน้ากาก N95, จัดทำมุ้งสู้ฝุ่นให้ผู้ป่วยติดเตียง, ห้องปลอดฝุ่นในศูนย์เด็กเล็ก/โรงเรียน</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <i data-lucide="pill" class="w-5 h-5 c1-icon shrink-0 mt-0.5"></i>
+                                    <div>
+                                        <p class="font-bold text-main text-[14px] baseline-fix">สั่งจ่ายยาผ่าน Telemedicine :</p>
+                                        <p class="text-[13px] text-muted leading-snug font-medium mt-1">ติดตามและสั่งจ่ายยาสำหรับผู้ป่วยอาการคงที่ เพื่อลดความเสี่ยงสัมผัสฝุ่น</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- ================= Column 2: Middle (Clinic & ER) ================= -->
-                    <div id="col-mid" class="col-2 flow-col col-span-2 min-w-0">
-                        
-                        <!-- NEW CONNECTING ARROW (Col 2 -> Col 3) -->
-                        <div class="absolute top-1/2 -right-4 translate-x-[50%] -translate-y-1/2 z-30 bg-white p-2 rounded-full border-[3px] shadow-md pointer-events-none transition-transform" style="border-color: var(--arrow-border); color: var(--arrow-text);">
-                            <i data-lucide="arrow-right" class="w-7 h-7 font-extrabold"></i>
-                        </div>
-
-                        <div class="w-full flex justify-center">
-                            <h2 class="text-[17px] font-extrabold text-center c2-title py-3 px-6 rounded-full shadow-sm flex items-center justify-center whitespace-nowrap w-max min-w-[70%]">
-                                <span class="baseline-fix-inline">การรับผู้ป่วยและดูแลรักษา (รับ)</span>
-                            </h2>
-                        </div>
-                        
-                        <div id="inner-grid" class="grid grid-cols-[1.05fr_0.95fr] gap-4 h-full mt-3 min-w-0">
+                    <div class="col-span-2 relative min-w-0">
+                        <div id="col-mid" class="col-2 flow-col bg-orange-50/20">
                             
-                            <!-- Left Sub-column -->
-                            <div class="space-y-4 flex flex-col justify-between h-full min-w-0">
-                                
-                                <div class="inner-box flex flex-col gap-2 relative border-orange-200 shadow-sm flex-1 p-4 min-w-0">
-                                    <div class="flex items-center gap-2 w-full border-b border-orange-100 pb-2">
-                                        <i data-lucide="smartphone" class="w-6 h-6 c2-icon shrink-0"></i>
-                                        <h3 class="font-bold text-main text-[15px] baseline-fix whitespace-nowrap">ระบบก่อนถึง รพ. และออนไลน์</h3>
-                                        <div class="bg-orange-500 text-white text-[12px] px-3 py-1 rounded-full font-bold ml-auto shrink-0 min-w-max shadow-sm flex items-center justify-center">
-                                            <span class="baseline-fix-inline whitespace-nowrap">คลินิกมลพิษ</span>
-                                        </div>
-                                    </div>
-                                    <div class="grid grid-cols-[1fr_auto_1fr] w-full gap-2 items-center h-full min-h-[40px] min-w-0">
-                                        <div class="flex flex-col justify-center h-full min-w-0">
-                                            <!-- Fixed Truncate Issue: Break words properly -->
-                                            <p class="text-muted font-medium leading-tight text-[12px] break-words">ผ่าน Line OA หรือ หมอพร้อม</p>
-                                        </div>
-                                        <i data-lucide="arrow-right" class="arrow-icon w-4 h-4 shrink-0"></i>
-                                        <div class="flex flex-col justify-center items-end text-right h-full min-w-0">
-                                            <p class="font-bold c2-text leading-tight baseline-fix text-[13px]">ประเมินเบื้องต้น</p>
-                                            <p class="text-muted font-medium leading-tight mt-1 text-[12px]">& Telemedicine</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="inner-box flex flex-col gap-2 relative border-orange-200 shadow-sm flex-1 p-4 pt-7 min-w-0">
-                                    <div class="tag-code"><span class="baseline-fix-inline">รหัส Z58.1</span></div>
-                                    <div class="flex items-center gap-2 w-full border-b border-orange-100 pb-2">
-                                        <i data-lucide="building-2" class="w-6 h-6 c2-icon shrink-0"></i>
-                                        <h3 class="font-bold text-[15px] text-main leading-tight baseline-fix whitespace-nowrap">PCU หนองหาร & รพ.สต.</h3>
-                                    </div>
-                                    <div class="grid grid-cols-[0.8fr_auto_1.2fr_auto_1fr] w-full gap-2 h-full min-h-[50px] items-center text-[12px] min-w-0">
-                                        <div class="flex flex-col justify-center items-center text-center h-full px-1">
-                                            <p class="font-bold text-main leading-tight baseline-fix">คัดกรองอาการ</p>
-                                        </div>
-                                        <i data-lucide="arrow-right" class="arrow-icon w-4 h-4 shrink-0"></i>
-                                        <div class="flex flex-col justify-center items-center text-center h-full px-1 min-w-0">
-                                            <p class="font-bold text-main leading-tight baseline-fix break-words">เข้าข่าย: ลง <a href="https://docs.google.com/spreadsheets/d/1fq34BEtpt6nWbxSupNacky3ZzlV7HymWNW2xv6LyIcA/edit?usp=sharing" target="_blank" class="text-blue-600 hover:text-blue-800 underline relative z-50 whitespace-nowrap" title="คลิกเพื่อกรอกข้อมูล">GG Sheets 🔗</a></p>
-                                            <p class="text-muted font-medium leading-tight mt-1 break-words">+ รักษาตามอาการ</p>
-                                        </div>
-                                        <i data-lucide="arrow-right" class="arrow-icon w-4 h-4 shrink-0"></i>
-                                        <div class="flex flex-col justify-center items-center text-center h-full px-1">
-                                            <p class="text-muted font-medium leading-tight baseline-fix">อาการรุนแรง</p>
-                                            <p class="font-bold text-red-600 leading-tight mt-1">Refer รพ.</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="inner-box flex flex-col gap-2 relative border-orange-200 shadow-sm flex-1 p-4 pt-7 min-w-0">
-                                    <div class="tag-code"><span class="baseline-fix-inline">รหัส Z58.1</span></div>
-                                    <div class="flex items-center gap-2 w-full border-b border-orange-100 pb-2">
-                                        <i data-lucide="eye" class="w-6 h-6 c2-icon shrink-0"></i>
-                                        <h3 class="font-bold text-[15px] text-main leading-tight baseline-fix whitespace-nowrap">ผู้ป่วยนอก (OPD)</h3>
-                                    </div>
-                                    <div class="grid grid-cols-[0.8fr_auto_1.2fr_auto_1fr] w-full gap-2 h-full min-h-[50px] items-center text-[12px] min-w-0">
-                                        <div class="flex flex-col justify-center items-center text-center h-full px-1">
-                                            <p class="font-bold text-main leading-tight baseline-fix">คัดกรองอาการ</p>
-                                        </div>
-                                        <i data-lucide="arrow-right" class="arrow-icon w-4 h-4 shrink-0"></i>
-                                        <div class="flex flex-col justify-center items-center text-center h-full px-1 min-w-0">
-                                            <p class="font-bold text-main leading-tight baseline-fix break-words">เข้าข่าย: ลง <a href="https://docs.google.com/spreadsheets/d/1j5xpdB-LNhucSVNhQuqShKUDv-xyWCGB5xhC295J3M4/edit?usp=sharing" target="_blank" class="text-blue-600 hover:text-blue-800 underline relative z-50 whitespace-nowrap" title="คลิกเพื่อกรอกข้อมูล">GG Sheets 🔗</a></p>
-                                            <p class="text-muted font-medium leading-tight mt-1 break-words">+ รักษาตามอาการ</p>
-                                        </div>
-                                        <i data-lucide="arrow-right" class="arrow-icon w-4 h-4 shrink-0"></i>
-                                        <div class="flex flex-col justify-center items-center text-center h-full px-1">
-                                            <p class="text-muted font-medium leading-tight baseline-fix">นัดติดตาม ไม่ทุเลา</p>
-                                            <p class="font-bold c2-text leading-tight mt-1 whitespace-nowrap">ส่งคลินิกมลพิษ</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="inner-box flex flex-col gap-2 relative border-orange-200 shadow-sm flex-1 p-4 pt-7 min-w-0">
-                                    <div class="tag-code"><span class="baseline-fix-inline">รหัส Z58.1</span></div>
-                                    <div class="flex items-center gap-2 w-full border-b border-orange-100 pb-2">
-                                        <i data-lucide="ambulance" class="w-6 h-6 text-red-500 shrink-0"></i>
-                                        <h3 class="font-bold text-[15px] text-main leading-tight baseline-fix whitespace-nowrap">ผู้ป่วยฉุกเฉิน (ER) & 1669</h3>
-                                    </div>
-                                    <div class="grid grid-cols-[1fr_auto_0.8fr_auto_1.4fr] w-full gap-2 h-full min-h-[50px] items-center text-[12px] min-w-0">
-                                        <div class="flex flex-col justify-center items-center text-center h-full px-1 min-w-0">
-                                            <p class="font-bold text-main leading-tight baseline-fix break-words">อาการรุนแรง</p>
-                                            <p class="text-muted font-medium leading-tight mt-1 break-words">(หอบหืด, COPD..)</p>
-                                        </div>
-                                        <i data-lucide="arrow-right" class="arrow-icon w-4 h-4 shrink-0"></i>
-                                        <div class="flex flex-col justify-center items-center text-center h-full px-1">
-                                            <p class="font-bold text-main leading-tight baseline-fix">1669 / EMS</p>
-                                            <p class="text-muted font-medium leading-tight mt-1">รับเข้า ER</p>
-                                        </div>
-                                        <i data-lucide="arrow-right" class="arrow-icon w-4 h-4 shrink-0"></i>
-                                        <div class="flex flex-col justify-center items-center text-center h-full px-1 min-w-0">
-                                            <p class="font-bold text-main leading-tight baseline-fix break-words">เข้าข่าย: ลง <a href="https://docs.google.com/spreadsheets/d/1Ba-5IzHXOzEQziXY7vfdvDXzK0dOZv0VmoINAd-sNxU/edit?usp=drivesdk" target="_blank" class="text-blue-600 hover:text-blue-800 underline relative z-50 whitespace-nowrap" title="คลิกเพื่อกรอกข้อมูล">GG Sheets 🔗</a></p>
-                                            <p class="text-muted font-medium leading-tight mt-1 break-words">+ ประเมิน Admit/กลับบ้าน</p>
-                                        </div>
-                                    </div>
-                                </div>
+                            <!-- Arrow Connector (Col 2 -> Col 3) -->
+                            <div class="absolute top-1/2 -right-[35px] -translate-y-1/2 z-30 w-11 h-11 rounded-full flex items-center justify-center border-[4px] border-white shadow-sm pointer-events-none" style="background-color: var(--connector-color); color: white;">
+                                <i data-lucide="arrow-right" class="w-5 h-5 font-black"></i>
                             </div>
 
-                            <!-- Right Sub-column (Pollution Clinic) -->
-                            <div class="inner-box border-orange-400 bg-[#fff2e5] p-4 flex flex-col h-full relative shadow-md min-w-0">
-                                <div class="flex items-center justify-center gap-3 border-b-2 border-orange-200 pb-3 mb-5 w-full">
-                                    <i data-lucide="stethoscope" class="w-6 h-6 text-orange-600 shrink-0"></i>
-                                    <h3 class="font-extrabold text-orange-900 text-lg whitespace-nowrap baseline-fix">
-                                        คลินิกมลพิษ
-                                    </h3>
+                            <div class="w-full flex justify-center mt-2">
+                                <h2 class="text-[15px] font-extrabold text-center c2-title py-2 px-10 rounded-full flex items-center justify-center whitespace-nowrap w-max">
+                                    <span class="baseline-fix-inline">การรับผู้ป่วยและดูแลรักษา (รับ)</span>
+                                </h2>
+                            </div>
+                            
+                            <div id="inner-grid" class="grid grid-cols-[1.1fr_0.9fr] gap-5 h-full mt-2 min-w-0">
+                                
+                                <!-- Left Sub-column (4 Rows) -->
+                                <div class="space-y-4 flex flex-col justify-between h-full min-w-0">
+                                    
+                                    <!-- Row 1: Online -->
+                                    <div class="inner-box border-orange-200 flex-1 p-3.5 flex flex-col justify-center min-w-0">
+                                        <div class="flex items-center gap-2 w-full mb-2.5">
+                                            <i data-lucide="smartphone" class="w-5 h-5 c2-icon shrink-0"></i>
+                                            <h3 class="font-bold text-main text-[14px] baseline-fix whitespace-nowrap">ระบบก่อนถึง รพ. และออนไลน์</h3>
+                                            <div class="bg-orange-500 text-white text-[11px] px-2.5 py-0.5 rounded-full font-bold ml-auto shrink-0 shadow-sm">
+                                                <span class="baseline-fix-inline whitespace-nowrap">คลินิกมลพิษ</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center justify-between w-full text-[12.5px] min-w-0 px-1">
+                                            <p class="text-muted font-medium break-words w-1/3">ผ่าน Line OA หรือ หมอพร้อม</p>
+                                            <i data-lucide="arrow-right" class="w-4 h-4 text-slate-300 shrink-0 mx-2"></i>
+                                            <div class="text-right w-1/2">
+                                                <p class="font-bold c2-text baseline-fix">ประเมินเบื้องต้น</p>
+                                                <p class="text-muted font-medium mt-0.5">& Telemedicine</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Row 2: PCU -->
+                                    <div class="inner-box border-orange-200 flex-1 p-3.5 pt-6 relative flex flex-col justify-center min-w-0">
+                                        <div class="tag-code"><span class="baseline-fix-inline">รหัส Z58.1</span></div>
+                                        <div class="flex items-center gap-2 w-full mb-2.5">
+                                            <i data-lucide="building-2" class="w-5 h-5 c2-icon shrink-0"></i>
+                                            <h3 class="font-bold text-[14px] text-main baseline-fix whitespace-nowrap">PCU หนองหาร & รพ.สต.</h3>
+                                        </div>
+                                        <div class="flex items-center justify-between w-full text-[12px] min-w-0 px-1">
+                                            <p class="font-bold text-main text-center w-[20%]">คัดกรอง<br>อาการ</p>
+                                            <i data-lucide="arrow-right" class="w-4 h-4 text-slate-300 shrink-0 mx-1"></i>
+                                            <div class="text-center w-[40%]">
+                                                <p class="font-bold text-main break-words">เข้าข่าย: ลง <a href="#" class="text-blue-600 underline">GG Sheets</a></p>
+                                                <p class="text-muted font-medium mt-0.5">+ รักษาตามอาการ</p>
+                                            </div>
+                                            <i data-lucide="arrow-right" class="w-4 h-4 text-slate-300 shrink-0 mx-1"></i>
+                                            <div class="text-center w-[25%]">
+                                                <p class="text-muted font-medium">อาการรุนแรง</p>
+                                                <p class="font-bold text-red-600 mt-0.5">Refer รพ.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Row 3: OPD -->
+                                    <div class="inner-box border-orange-200 flex-1 p-3.5 pt-6 relative flex flex-col justify-center min-w-0">
+                                        <div class="tag-code"><span class="baseline-fix-inline">รหัส Z58.1</span></div>
+                                        <div class="flex items-center gap-2 w-full mb-2.5">
+                                            <i data-lucide="eye" class="w-5 h-5 c2-icon shrink-0"></i>
+                                            <h3 class="font-bold text-[14px] text-main baseline-fix whitespace-nowrap">ผู้ป่วยนอก (OPD)</h3>
+                                        </div>
+                                        <div class="flex items-center justify-between w-full text-[12px] min-w-0 px-1">
+                                            <p class="font-bold text-main text-center w-[20%]">คัดกรอง<br>อาการ</p>
+                                            <i data-lucide="arrow-right" class="w-4 h-4 text-slate-300 shrink-0 mx-1"></i>
+                                            <div class="text-center w-[40%]">
+                                                <p class="font-bold text-main break-words">เข้าข่าย: ลง <a href="#" class="text-blue-600 underline">GG Sheets</a></p>
+                                                <p class="text-muted font-medium mt-0.5">+ รักษาตามอาการ</p>
+                                            </div>
+                                            <i data-lucide="arrow-right" class="w-4 h-4 text-slate-300 shrink-0 mx-1"></i>
+                                            <div class="text-center w-[25%]">
+                                                <p class="text-muted font-medium">นัดติดตาม ไม่ทุเลา</p>
+                                                <p class="font-bold c2-text mt-0.5">ส่งคลินิกมลพิษ</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Row 4: ER -->
+                                    <div class="inner-box border-orange-200 flex-1 p-3.5 pt-6 relative flex flex-col justify-center min-w-0">
+                                        <div class="tag-code"><span class="baseline-fix-inline">รหัส Z58.1</span></div>
+                                        <div class="flex items-center gap-2 w-full mb-2.5">
+                                            <i data-lucide="ambulance" class="w-5 h-5 text-red-500 shrink-0"></i>
+                                            <h3 class="font-bold text-[14px] text-main baseline-fix whitespace-nowrap">ผู้ป่วยฉุกเฉิน (ER) & 1669</h3>
+                                        </div>
+                                        <div class="flex items-center justify-between w-full text-[12px] min-w-0 px-1">
+                                            <div class="text-center w-[25%]">
+                                                <p class="font-bold text-main break-words">อาการรุนแรง</p>
+                                                <p class="text-muted font-medium mt-0.5">(หอบหืด, COPD..)</p>
+                                            </div>
+                                            <i data-lucide="arrow-right" class="w-4 h-4 text-slate-300 shrink-0 mx-1"></i>
+                                            <div class="text-center w-[25%]">
+                                                <p class="font-bold text-main">1669 / EMS</p>
+                                                <p class="text-muted font-medium mt-0.5">รับเข้า ER</p>
+                                            </div>
+                                            <i data-lucide="arrow-right" class="w-4 h-4 text-slate-300 shrink-0 mx-1"></i>
+                                            <div class="text-center w-[35%]">
+                                                <p class="font-bold text-main break-words">เข้าข่าย: ลง <a href="#" class="text-blue-600 underline">GG Sheets</a></p>
+                                                <p class="text-muted font-medium mt-0.5 break-words">+ ประเมิน Admit/กลับบ้าน</p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <div class="space-y-5 flex-grow text-[14px] text-main min-w-0">
-                                    <div>
-                                        <div class="font-bold text-orange-800 flex items-start gap-2 mb-2">
-                                            <div class="bg-orange-200 rounded-full shrink-0 shadow-inner flex items-center justify-center" style="width: 22px; height: 22px; min-width: 22px;">
-                                                <span class="text-[12px] text-[#9a3412] leading-none baseline-fix-inline font-black">1</span>
-                                            </div>
-                                            <span class="baseline-fix-inline mt-[2px]">จัดการนัดหมาย</span>
-                                        </div>
-                                        <p class="pl-8 text-muted font-medium">(หมอพร้อม/Telemedicine/Walk-in)</p>
+                                <!-- Right Sub-column (Pollution Clinic Box) -->
+                                <div class="inner-box border-orange-300 bg-white p-5 flex flex-col h-full relative shadow-sm min-w-0">
+                                    <div class="flex items-center justify-center gap-2 border-b-2 border-orange-100 pb-3 mb-4 w-full">
+                                        <i data-lucide="stethoscope" class="w-5 h-5 text-orange-600 shrink-0"></i>
+                                        <h3 class="font-extrabold text-orange-800 text-[16px] whitespace-nowrap baseline-fix">
+                                            คลินิกมลพิษ
+                                        </h3>
                                     </div>
 
-                                    <div>
-                                        <div class="font-bold text-orange-800 flex items-start gap-2 mb-2">
-                                            <div class="bg-orange-200 rounded-full shrink-0 shadow-inner flex items-center justify-center" style="width: 22px; height: 22px; min-width: 22px;">
-                                                <span class="text-[12px] text-[#9a3412] leading-none baseline-fix-inline font-black">2</span>
+                                    <div class="space-y-6 flex-grow text-[13.5px] text-main min-w-0 px-1">
+                                        
+                                        <!-- Step 1 -->
+                                        <div>
+                                            <div class="font-bold text-orange-800 flex items-start gap-2 mb-1.5">
+                                                <div class="bg-orange-100 rounded-full shrink-0 flex items-center justify-center mt-0.5" style="width: 20px; height: 20px;">
+                                                    <span class="text-[11px] text-orange-700 font-black">1</span>
+                                                </div>
+                                                <span class="baseline-fix-inline">จัดการนัดหมาย</span>
                                             </div>
-                                            <span class="baseline-fix-inline mt-[2px]">เฝ้าระวัง (การเข้ารับการรักษาของผู้ป่วย)</span>
+                                            <p class="pl-7 text-muted font-medium">(หมอพร้อม/Telemedicine/Walk-in)</p>
                                         </div>
-                                        <ul class="list-disc pl-12 space-y-2 text-muted font-medium break-words">
-                                            <li>ตรวจสอบรหัส ICD-10 ที่เกี่ยวข้องกับการสัมผัส PM2.5 ในระบบ HosOS</li>
-                                            <li>ตรวจสอบผู้ป่วยที่เข้ารับการรักษาในวันที่ฝุ่นสูง (> 37.5) GG sheets ของ OPD/ER/PCU หนองหาร</li>
-                                        </ul>
-                                    </div>
 
-                                    <div>
-                                        <div class="font-bold text-orange-800 flex items-start gap-2 mb-3">
-                                            <div class="bg-orange-200 rounded-full shrink-0 shadow-inner flex items-center justify-center" style="width: 22px; height: 22px; min-width: 22px;">
-                                                <span class="text-[12px] text-[#9a3412] leading-none baseline-fix-inline font-black">3</span>
+                                        <!-- Step 2 -->
+                                        <div>
+                                            <div class="font-bold text-orange-800 flex items-start gap-2 mb-1.5">
+                                                <div class="bg-orange-100 rounded-full shrink-0 flex items-center justify-center mt-0.5" style="width: 20px; height: 20px;">
+                                                    <span class="text-[11px] text-orange-700 font-black">2</span>
+                                                </div>
+                                                <span class="baseline-fix-inline">เฝ้าระวัง (การเข้ารับการรักษา)</span>
                                             </div>
-                                            <span class="baseline-fix-inline mt-[2px]">คัดกรอง ซักประวัติ สอบสวนโรค</span>
+                                            <ul class="list-disc pl-11 space-y-2 text-muted font-medium break-words leading-snug">
+                                                <li>ตรวจสอบรหัส ICD-10 ที่เกี่ยวข้องกับการสัมผัส PM2.5 ในระบบ HosOS</li>
+                                                <li>ตรวจสอบผู้ป่วยที่เข้ารับการรักษาในวันที่ฝุ่นสูง (> 37.5) ผ่าน GG sheets (OPD/ER/PCU)</li>
+                                            </ul>
                                         </div>
-                                        <div class="pl-8 space-y-3 min-w-0">
-                                            
-                                            <div class="bg-white p-3 rounded-lg border border-orange-100 shadow-sm flex flex-col justify-center min-h-[60px]">
-                                                <p class="font-bold text-emerald-700 mb-1.5 flex items-center gap-2 baseline-fix">
-                                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-500 shrink-0"></i> กรณีไม่เข้าข่าย / อาการเล็กน้อย
-                                                </p>
-                                                <p class="text-muted font-medium pl-7 border-l-2 border-emerald-300 ml-2.5 leading-tight break-words">
-                                                    ให้คำแนะนำ และส่งต่อ <span class="font-bold text-main">ทีม 3 หมอ</span>
-                                                </p>
-                                            </div>
-                                            
-                                            <div class="bg-white p-3 rounded-lg border border-orange-100 shadow-sm flex flex-col justify-center min-w-0">
-                                                <p class="font-bold text-red-700 mb-2 flex items-center gap-2 baseline-fix">
-                                                    <i data-lucide="alert-circle" class="w-5 h-5 text-red-500 shrink-0"></i> กรณีเข้าข่าย
-                                                </p>
-                                                <ul class="list-disc pl-10 space-y-2 text-muted font-medium ml-1 break-words">
-                                                    <li class="baseline-fix">ส่งพบแพทย์ ตรวจ Lab</li>
-                                                    <li class="baseline-fix"><span class="text-red-600 font-bold">ส่งห้องฉุกเฉิน (ER)</span> หากอาการรุนแรง</li>
-                                                    <li class="leading-snug baseline-fix mt-1">แจ้งข้อมูลผู้ป่วยที่เข้าข่ายแก่งาน<span style="color: #7e22ce; font-weight: 800;">ควบคุมโรค</span> <br/><span class="text-[12px] opacity-80 font-normal">(เพื่อให้ดำเนินการลงพื้นที่ + รายงาน สสจ.)</span></li>
-                                                </ul>
-                                            </div>
 
+                                        <!-- Step 3 -->
+                                        <div>
+                                            <div class="font-bold text-orange-800 flex items-start gap-2 mb-3">
+                                                <div class="bg-orange-100 rounded-full shrink-0 flex items-center justify-center mt-0.5" style="width: 20px; height: 20px;">
+                                                    <span class="text-[11px] text-orange-700 font-black">3</span>
+                                                </div>
+                                                <span class="baseline-fix-inline">คัดกรอง ซักประวัติ สอบสวนโรค</span>
+                                            </div>
+                                            <div class="pl-7 space-y-3 min-w-0">
+                                                
+                                                <div class="bg-emerald-50/50 p-3 rounded-lg border border-emerald-100 flex flex-col justify-center">
+                                                    <p class="font-bold text-emerald-700 mb-1 flex items-center gap-1.5 baseline-fix">
+                                                        <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500 shrink-0"></i> กรณีไม่เข้าข่าย / อาการเล็กน้อย
+                                                    </p>
+                                                    <p class="text-muted font-medium pl-5 border-l-2 border-emerald-200 ml-2 leading-tight">
+                                                        ให้คำแนะนำ และส่งต่อ <span class="font-bold text-slate-700">ทีม 3 หมอ</span>
+                                                    </p>
+                                                </div>
+                                                
+                                                <div class="bg-red-50/50 p-3 rounded-lg border border-red-100 flex flex-col justify-center">
+                                                    <p class="font-bold text-red-700 mb-1.5 flex items-center gap-1.5 baseline-fix">
+                                                        <i data-lucide="alert-circle" class="w-4 h-4 text-red-500 shrink-0"></i> กรณีเข้าข่าย
+                                                    </p>
+                                                    <ul class="list-disc pl-8 space-y-1.5 text-muted font-medium ml-0.5 break-words leading-snug">
+                                                        <li>ส่งพบแพทย์ ตรวจ Lab</li>
+                                                        <li><span class="text-red-600 font-bold">ส่งห้องฉุกเฉิน (ER)</span> หากอาการรุนแรง</li>
+                                                        <li class="mt-1">แจ้งข้อมูลผู้ป่วยที่เข้าข่ายแก่งาน<span style="color: var(--dc-title-text); font-weight: 800;">ควบคุมโรค</span> <br/><span class="text-[11.5px] opacity-80">(ดำเนินการลงพื้นที่ + รายงาน สสจ.)</span></li>
+                                                    </ul>
+                                                </div>
+
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -391,49 +380,53 @@
                     </div>
 
                     <!-- ================= Column 3: Right (Control & Discharge) ================= -->
-                    <div id="col-right" class="col-3 flow-col col-span-1 min-w-0">
-
-                        <div class="w-full flex justify-center">
-                            <h2 class="text-[17px] font-extrabold text-center c3-title py-3 px-6 rounded-full shadow-sm whitespace-nowrap w-max min-w-full flex items-center justify-center">
-                                <span class="baseline-fix-inline">ควบคุมโรคและจำหน่ายผู้ป่วย</span>
-                            </h2>
-                        </div>
-                        
-                        <div class="flex flex-col gap-5 h-full mt-3">
-                            <div class="rounded-2xl p-5 box-dc shadow-sm flex-1 flex flex-col justify-center items-center relative transition-transform hover:-translate-y-1 bg-white">
-                                <h3 class="font-bold text-center mb-5 text-lg box-dc-title py-2 px-6 rounded-full leading-tight baseline-fix w-full">
-                                    งานควบคุมโรค<br><span class="text-sm font-normal">(Disease Control)</span>
-                                </h3>
-                                <div class="grid grid-cols-[1fr_auto_1fr] w-full items-center text-center gap-2 h-full">
-                                    <div class="flex flex-col items-center justify-center h-full">
-                                        <i data-lucide="shield-alert" class="w-10 h-10 mb-2 box-dc-icon"></i>
-                                        <p class="font-bold text-[14px] text-main leading-tight baseline-fix">รับแจ้งข้อมูล</p>
-                                        <p class="text-[12px] text-muted font-medium leading-tight mt-1 opacity-90 break-words">ผู้ป่วยเข้าข่าย<br/>และอาการรุนแรง</p>
-                                    </div>
-                                    <div class="flex items-center h-full">
-                                        <i data-lucide="arrow-right" class="w-7 h-7 box-dc-icon opacity-70"></i>
-                                    </div>
-                                    <div class="flex flex-col items-center justify-center h-full">
-                                        <i data-lucide="megaphone" class="w-10 h-10 mb-2 box-dc-icon"></i>
-                                        <p class="font-bold text-[14px] text-main leading-tight baseline-fix">สอบสวน & รายงาน</p>
-                                        <p class="text-[12px] text-muted font-medium mt-1 opacity-90 break-words">ลงพื้นที่สอบสวนโรค<br/>และรายงาน สสจ.</p>
+                    <div class="col-span-1 relative min-w-0">
+                        <div id="col-right" class="col-3 flow-col bg-emerald-50/30">
+                            
+                            <div class="w-full flex justify-center mt-2">
+                                <h2 class="text-[15px] font-extrabold text-center c3-title py-2 px-6 rounded-full whitespace-nowrap w-max">
+                                    <span class="baseline-fix-inline">ควบคุมโรคและจำหน่ายผู้ป่วย</span>
+                                </h2>
+                            </div>
+                            
+                            <div class="flex flex-col gap-5 h-full mt-2">
+                                <!-- Disease Control -->
+                                <div class="rounded-xl p-5 box-dc flex-1 flex flex-col justify-center items-center bg-white relative">
+                                    <h3 class="font-bold text-center mb-5 text-[15px] box-dc-title py-1.5 px-6 rounded-full w-full">
+                                        <span class="baseline-fix-inline">งานควบคุมโรค</span><br>
+                                        <span class="text-[11px] font-normal opacity-80 baseline-fix-inline">(Disease Control)</span>
+                                    </h3>
+                                    <div class="flex items-center justify-between w-full text-center h-full px-2">
+                                        <div class="flex flex-col items-center justify-center w-[40%]">
+                                            <i data-lucide="shield-alert" class="w-8 h-8 mb-2 box-dc-icon"></i>
+                                            <p class="font-bold text-[13px] text-main baseline-fix">รับแจ้งข้อมูล</p>
+                                            <p class="text-[11.5px] text-muted font-medium mt-1 leading-tight">ผู้ป่วยเข้าข่าย<br/>และอาการรุนแรง</p>
+                                        </div>
+                                        <i data-lucide="arrow-right" class="w-5 h-5 box-dc-icon opacity-50 shrink-0"></i>
+                                        <div class="flex flex-col items-center justify-center w-[40%]">
+                                            <i data-lucide="megaphone" class="w-8 h-8 mb-2 box-dc-icon"></i>
+                                            <p class="font-bold text-[13px] text-main baseline-fix">สอบสวน & รายงาน</p>
+                                            <p class="text-[11.5px] text-muted font-medium mt-1 leading-tight">ลงพื้นที่สอบสวน<br/>และรายงาน สสจ.</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="rounded-2xl p-5 box-discharge shadow-sm flex-1 flex flex-col justify-center relative transition-transform hover:-translate-y-1 bg-white">
-                                <h3 class="font-bold text-center mb-5 text-lg box-discharge-title py-2 px-6 rounded-full leading-tight baseline-fix w-full">
-                                    การจำหน่ายผู้ป่วย<br><span class="text-sm font-normal">(Discharge)</span>
-                                </h3>
-                                <div class="text-center space-y-3 flex flex-col justify-center items-center h-full">
-                                    <div class="w-16 h-1 bg-current opacity-30 mx-auto rounded-full mb-2" style="color: var(--dis-title-text);"></div>
-                                    <p class="text-[13px] font-bold text-muted leading-relaxed opacity-90 baseline-fix break-words">ประสานทีมเยี่ยมบ้าน<br/>ประเมินสภาพที่อยู่อาศัยไม่ให้กำเริบซ้ำ</p>
+                                <!-- Discharge -->
+                                <div class="rounded-xl p-5 box-discharge flex-1 flex flex-col justify-center bg-white relative">
+                                    <h3 class="font-bold text-center mb-5 text-[15px] box-discharge-title py-1.5 px-6 rounded-full w-full">
+                                        <span class="baseline-fix-inline">การจำหน่ายผู้ป่วย</span><br>
+                                        <span class="text-[11px] font-normal opacity-80 baseline-fix-inline">(Discharge)</span>
+                                    </h3>
+                                    <div class="text-center space-y-2 flex flex-col justify-center items-center h-full">
+                                        <div class="w-12 h-[2px] bg-emerald-200 mx-auto rounded-full mb-1"></div>
+                                        <p class="text-[13px] font-bold text-muted leading-relaxed baseline-fix">ประสานทีมเยี่ยมบ้าน<br/>ประเมินสภาพที่อยู่อาศัยไม่ให้กำเริบซ้ำ</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
+                </div>
             </div>
         </div>
     </div>
@@ -445,16 +438,15 @@
             window.addEventListener('resize', adjustScale);
         });
 
-        // ฟังก์ชันย่อหน้าจอให้มองเห็นครบถ้วนบนอุปกรณ์ขนาดเล็ก
+        // ฟังก์ชัน Auto-Scale ย่อส่วนให้พอดีกับหน้าจอทุกอุปกรณ์
         function adjustScale() {
             const wrapper = document.getElementById('scale-wrapper');
-            const targetWidth = 1750; // ความกว้างรวมเผื่อขอบจอ (Padding)
+            const targetWidth = 1750; // เผื่อขอบซ้ายขวาเล็กน้อย
             const screenWidth = window.innerWidth;
             
             if (screenWidth < targetWidth) {
                 const scale = screenWidth / targetWidth;
                 wrapper.style.transform = `scale(${scale})`;
-                // ชดเชยความสูงที่หดลงเพื่อไม่ให้มีพื้นที่ขาวเหลือด้านล่าง
                 const wrapperHeight = wrapper.offsetHeight;
                 wrapper.style.marginBottom = `-${wrapperHeight * (1 - scale)}px`;
             } else {
@@ -463,42 +455,40 @@
             }
         }
 
+        // ฟังก์ชัน Download รูปภาพฉบับแก้ไขการตกขอบ
         async function downloadImage() {
             const btn = document.querySelector('button[onclick="downloadImage()"]');
             const originalContent = btn.innerHTML;
             btn.innerHTML = 'กำลังประมวลผล...';
             
-            // รอให้ฟอนต์ทั้งหมดโหลดเสร็จสมบูรณ์ก่อนพิมพ์
             await document.fonts.ready;
             
-            // ใส่ Loading หน้าจอเพื่อกันไม่ให้ผู้ใช้เห็นจอกระตุกตอน Clone
+            // หน้าจอโหลดดิ้ง
             const overlay = document.createElement('div');
             overlay.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;background:#f8fafc;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;';
             overlay.innerHTML = `
                 <div style="font-family: 'Sarabun', sans-serif; text-align: center;">
-                    <svg class="animate-spin mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
+                    <svg class="animate-spin mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
                     <h2 style="font-size: 1.5rem; font-weight: 700; color: #1e293b;">กำลังสร้างรูปภาพคุณภาพสูง...</h2>
-                    <p style="color: #64748b; margin-top: 0.5rem;">กำลังจัดเรียงข้อมูลไม่ให้ตกขอบ กรุณารอสักครู่</p>
+                    <p style="color: #64748b; margin-top: 0.5rem;">จัดเตรียมแผนผังให้สมบูรณ์ กรุณารอสักครู่</p>
                 </div>
             `;
             document.body.appendChild(overlay);
 
             const captureArea = document.getElementById('capture-area');
 
-            // หน่วงเวลาเล็กน้อยให้ Loading ขึ้นก่อน
             setTimeout(() => {
+                // ใช้ onclone เพื่อจำลองเอกสารในขนาดจริง (1680px) ป้องกันข้อความบีบอัดหรือตกขอบ
                 html2canvas(captureArea, {
-                    scale: 2, // ความคมชัด 2 เท่า
+                    scale: 2, 
                     backgroundColor: "#f8fafc", 
                     useCORS: true, 
                     scrollY: 0,
                     scrollX: 0,
                     width: 1680,
-                    windowWidth: 1680, // บังคับให้ระบบมองเห็นจอขนาดเต็ม 1680px เสมอ
+                    windowWidth: 1680, 
                     logging: false,
                     onclone: function (clonedDoc) {
-                        // FIX TEXT CUTOFF: ไปปลดล็อกการตั้งค่า Scale ในเอกสารตัวโคลน 
-                        // เพื่อให้ HTML2Canvas ถ่ายภาพขนาดเต็มโดยไม่มีการตกขอบ
                         const wrapper = clonedDoc.getElementById('scale-wrapper');
                         if (wrapper) {
                             wrapper.style.transform = 'none';
@@ -516,7 +506,7 @@
                     btn.innerHTML = originalContent;
                     
                     const link = document.createElement('a');
-                    link.download = 'PM25_Roles_Sansai_Hospital.png';
+                    link.download = 'PM25_Roles_Sansai_Hospital_Premium.png';
                     link.href = canvas.toDataURL('image/png', 1.0);
                     link.click();
                 }).catch(err => {
